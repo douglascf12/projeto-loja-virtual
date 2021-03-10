@@ -16,7 +16,7 @@ public class FuncionarioController {
     @Autowired
     private FuncionarioRepository funcionarioRepository;
 
-    @GetMapping("/administrativo/funcionario/cadastrar")
+    @GetMapping("/administrativo/funcionarios/cadastrar")
     public ModelAndView cadastrar(Funcionario funcionario) {
         ModelAndView mv = new ModelAndView("administrativo/funcionarios/cadastro");
         mv.addObject("funcionario", funcionario);
@@ -24,8 +24,10 @@ public class FuncionarioController {
     }
 
     @GetMapping("/administrativo/funcionarios/listar")
-    public String listar() {
-        return "administrativo/funcionarios/lista";
+    public ModelAndView listar() {
+        ModelAndView mv = new ModelAndView("administrativo/funcionarios/lista");
+        mv.addObject("listaFuncionarios", funcionarioRepository.findAll());
+        return mv;
     }
     
     @PostMapping("/administrativo/funcionarios/salvar")
